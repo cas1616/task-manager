@@ -1,0 +1,33 @@
+# Archivo de configuración para Render
+# Este archivo permite desplegar todo con un solo clic
+
+services:
+  # Backend - Web Service
+  - type: web
+    name: task-manager-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    rootDir: backend
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false  # Debes configurarlo manualmente en Render
+      - key: JWT_SECRET
+        sync: false  # Debes configurarlo manualmente en Render
+
+  # Frontend - Static Site
+  - type: web
+    name: task-manager-frontend
+    env: static
+    region: oregon
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./build
+    rootDir: frontend
+    envVars:
+      - key: REACT_APP_API_URL
+        sync: false  # Debes configurarlo manualmente con la URL del backend
