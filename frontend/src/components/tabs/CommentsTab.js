@@ -1,12 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
-import { useAuth } from '../../context/AuthContext';
 
 const CommentsTab = () => {
-  const { user } = useAuth();
   const [taskId, setTaskId] = useState('');
   const [commentText, setCommentText] = useState('');
   const [comments, setComments] = useState([]);
+  const [tasks, setTasks] = useState([]);
+  const [tasksError, setTasksError] = useState('');
+
+  useEffect(() => {
+    const loadTasks = async () => {
+      try {
+        const response = await api.get('/api/tasks');
+        setTasks(response.data || []);
+        setTasksError('');
+      } catch (error) {
+        console.error('Error cargando tareas:', error);
+        setTasks([]);
+        setTasksError('No se pudieron cargar las tareas para seleccionar.');
+      }
+    };
+
+    loadTasks();
+  }, []);
 
   const loadComments = async () => {
     const trimmedTaskId = taskId.trim();
@@ -77,12 +93,31 @@ const CommentsTab = () => {
 
       <div className="form-section">
         <div className="form-group">
-          <label>ID Tarea:</label>
+          <label>Tarea:</label>
+          <select
+            value={taskId}
+            onChange={(e) => setTaskId(e.target.value)}
+          >
+            <option value="">Selecciona una tarea</option>
+            {tasks.map((task) => (
+              <option key={task._id} value={task._id}>
+                {task.title} ({task._id.slice(-6)})
+              </option>
+            ))}
+          </select>
+          {tasksError && (
+            <small style={{ color: '#ff8ba1', display: 'block', marginTop: '6px' }}>
+              {tasksError}
+            </small>
+          )}
+        </div>
+        <div className="form-group">
+          <label>ID Tarea (completo):</label>
           <input
             type="text"
             value={taskId}
             onChange={(e) => setTaskId(e.target.value)}
-            placeholder="ID de la tarea"
+            placeholder="Pega el ObjectId completo"
           />
         </div>
         <div className="form-group">
