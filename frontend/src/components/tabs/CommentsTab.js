@@ -9,13 +9,20 @@ const CommentsTab = () => {
   const [comments, setComments] = useState([]);
 
   const loadComments = async () => {
-    if (!taskId) {
+    const trimmedTaskId = taskId.trim();
+    if (!trimmedTaskId) {
+      setComments([]);
+      return;
+    }
+
+    if (!/^[0-9a-fA-F]{24}$/.test(trimmedTaskId)) {
+      alert('El ID de tarea debe ser un ObjectId válido (24 caracteres hex).');
       setComments([]);
       return;
     }
 
     try {
-      const response = await api.get(`/api/comments/task/${taskId}`);
+      const response = await api.get(`/api/comments/task/${trimmedTaskId}`);
       setComments(response.data);
     } catch (error) {
       console.error('Error cargando comentarios:', error);
@@ -24,8 +31,14 @@ const CommentsTab = () => {
   };
 
   const addComment = async () => {
-    if (!taskId) {
+    const trimmedTaskId = taskId.trim();
+    if (!trimmedTaskId) {
       alert('ID de tarea requerido');
+      return;
+    }
+
+    if (!/^[0-9a-fA-F]{24}$/.test(trimmedTaskId)) {
+      alert('El ID de tarea debe ser un ObjectId válido (24 caracteres hex).');
       return;
     }
 
@@ -35,7 +48,7 @@ const CommentsTab = () => {
     }
 
     try {
-      await api.post('/api/comments', { taskId, commentText });
+      await api.post('/api/comments', { taskId: trimmedTaskId, commentText });
       setCommentText('');
       loadComments();
       alert('Comentario agregado');
@@ -45,7 +58,11 @@ const CommentsTab = () => {
   };
 
   const formatComments = () => {
-    if (!taskId) return 'Ingresa un ID de tarea';
+    const trimmedTaskId = taskId.trim();
+    if (!trimmedTaskId) return 'Ingresa un ID de tarea';
+    if (!/^[0-9a-fA-F]{24}$/.test(trimmedTaskId)) {
+      return 'El ID de tarea debe ser un ObjectId válido (24 caracteres hex).';
+    }
     if (comments.length === 0) return 'No hay comentarios';
 
     return comments.map(comment => {
