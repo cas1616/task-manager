@@ -1,60 +1,81 @@
 .App {
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background: radial-gradient(circle at 15% 20%, rgba(124, 92, 255, 0.18), transparent 40%),
+    radial-gradient(circle at 85% 10%, rgba(20, 241, 149, 0.12), transparent 42%),
+    radial-gradient(circle at 50% 100%, rgba(91, 59, 255, 0.16), transparent 48%);
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 32px 24px 40px;
 }
 
 .panel {
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  margin-bottom: 20px;
+  background: linear-gradient(145deg, rgba(23, 31, 58, 0.92), rgba(12, 16, 30, 0.92));
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(124, 92, 255, 0.15);
+  margin-bottom: 24px;
+  backdrop-filter: blur(14px);
 }
 
 .header {
   display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  padding: 18px 22px;
+  background: linear-gradient(135deg, rgba(124, 92, 255, 0.25), rgba(20, 241, 149, 0.1));
+  border-radius: var(--radius-md);
+  margin-bottom: 24px;
+  border: 1px solid rgba(124, 92, 255, 0.2);
+  box-shadow: var(--glow);
+}
+
+.header span {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.header span strong {
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .tabs {
   display: flex;
-  gap: 10px;
-  border-bottom: 2px solid #dee2e6;
+  gap: 12px;
+  border-bottom: 1px solid rgba(124, 92, 255, 0.2);
   margin-bottom: 20px;
   flex-wrap: wrap;
 }
 
 .tab-button {
-  padding: 10px 20px;
+  padding: 10px 18px;
   background-color: transparent;
   border: none;
   border-bottom: 2px solid transparent;
   cursor: pointer;
   font-size: 14px;
-  color: #6c757d;
-  transition: all 0.3s;
+  color: var(--muted);
+  transition: all 0.25s ease;
+  border-radius: 10px 10px 0 0;
 }
 
 .tab-button:hover {
-  color: #495057;
-  background-color: #f8f9fa;
+  color: var(--text);
+  background-color: rgba(124, 92, 255, 0.12);
 }
 
 .tab-button.active {
-  color: #007bff;
-  border-bottom-color: #007bff;
+  color: var(--text);
+  border-bottom-color: var(--accent);
   font-weight: 600;
+  background: rgba(20, 241, 149, 0.14);
+  box-shadow: inset 0 -2px 0 var(--accent);
 }
 
 .tab-content {
@@ -66,98 +87,112 @@
 }
 
 .form-section {
-  background-color: #f8f9fa;
+  background: rgba(17, 22, 42, 0.8);
   padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  border-radius: var(--radius-md);
+  margin-bottom: 22px;
+  border: 1px solid rgba(124, 92, 255, 0.12);
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   font-weight: 600;
-  color: #495057;
+  color: var(--muted);
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
   width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-sm);
   font-size: 14px;
-  transition: border-color 0.3s;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: rgba(9, 12, 22, 0.7);
+  color: var(--text);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(166, 174, 196, 0.7);
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+  border-color: rgba(124, 92, 255, 0.7);
+  box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.2);
 }
 
 .form-group textarea {
   resize: vertical;
-  min-height: 80px;
+  min-height: 90px;
 }
 
 .button-group {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
-  margin-top: 15px;
+  margin-top: 16px;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 10px 18px;
   border: none;
-  border-radius: 4px;
+  border-radius: 999px;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 500;
-  transition: all 0.3s;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background: linear-gradient(135deg, #8a6bff, #4a2fff);
 }
 
 .btn-secondary {
-  background-color: #6c757d;
-  color: white;
+  background: rgba(166, 174, 196, 0.12);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .btn-secondary:hover {
-  background-color: #545b62;
+  background: rgba(166, 174, 196, 0.18);
 }
 
 .btn-danger {
-  background-color: #dc3545;
+  background: linear-gradient(135deg, #ff5b7c, #ff2f55);
   color: white;
 }
 
 .btn-danger:hover {
-  background-color: #c82333;
+  background: linear-gradient(135deg, #ff6b89, #e81d3f);
 }
 
 .btn-success {
-  background-color: #28a745;
-  color: white;
+  background: linear-gradient(135deg, #18e39d, #0fb877);
+  color: #05130c;
 }
 
 .btn-success:hover {
-  background-color: #218838;
+  background: linear-gradient(135deg, #2bf0b1, #0aa96b);
 }
 
 .table-section {
@@ -168,35 +203,38 @@ button {
 table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
-  border-radius: 8px;
+  background: rgba(10, 13, 25, 0.8);
+  border-radius: var(--radius-md);
   overflow: hidden;
+  border: 1px solid rgba(124, 92, 255, 0.14);
 }
 
 table th,
 table td {
-  padding: 12px;
+  padding: 12px 14px;
   text-align: left;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid rgba(124, 92, 255, 0.1);
+  color: var(--text);
 }
 
 table th {
-  background-color: #f8f9fa;
+  background: rgba(124, 92, 255, 0.14);
   font-weight: 600;
-  color: #495057;
+  color: var(--text);
 }
 
 table tr:hover {
-  background-color: #f8f9fa;
+  background-color: rgba(124, 92, 255, 0.08);
   cursor: pointer;
 }
 
 .stats {
   margin-top: 20px;
-  padding: 15px;
-  background-color: #e7f3ff;
-  border-radius: 8px;
-  border-left: 4px solid #007bff;
+  padding: 16px;
+  background: linear-gradient(120deg, rgba(124, 92, 255, 0.18), rgba(20, 241, 149, 0.14));
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--accent);
+  color: var(--text);
 }
 
 .text-area-section {
@@ -206,10 +244,12 @@ table tr:hover {
 .text-area-section textarea {
   width: 100%;
   min-height: 300px;
-  padding: 12px;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
+  padding: 14px;
+  border: 1px solid rgba(124, 92, 255, 0.2);
+  border-radius: var(--radius-md);
   font-family: 'Courier New', monospace;
   font-size: 12px;
   resize: vertical;
+  background: rgba(9, 12, 22, 0.9);
+  color: var(--text);
 }
