@@ -6,16 +6,19 @@ const Login = () => {
   const [username, setUsername] = useState('admin');
   const [password, setPassword] = useState('admin');
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setIsSubmitting(true);
 
     const result = await login(username, password);
     if (!result.success) {
       setError(result.error);
     }
+    setIsSubmitting(false);
   };
 
   return (
@@ -43,7 +46,9 @@ const Login = () => {
             />
           </div>
           {error && <div className="error-message">{error}</div>}
-          <button type="submit" className="btn-primary">Entrar</button>
+          <button type="submit" className="btn-primary" disabled={isSubmitting}>
+            {isSubmitting ? 'Ingresando...' : 'Entrar'}
+          </button>
         </form>
       </div>
     </div>
