@@ -6,6 +6,8 @@
   background: radial-gradient(circle at top, rgba(124, 92, 255, 0.35), transparent 55%),
     radial-gradient(circle at 80% 20%, rgba(20, 241, 149, 0.22), transparent 48%),
     linear-gradient(160deg, #0b0f1a 0%, #10182c 60%, #0b0f1a 100%);
+  background-size: 140% 140%, 160% 160%, 120% 120%;
+  background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
   animation: loginBackgroundShift 18s ease-in-out infinite;
