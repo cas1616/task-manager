@@ -1,0 +1,5 @@
+# Usar LF en todos los archivos de texto (evita el aviso CRLF/LF en Windows)
+* text=auto eol=lf
+
+# Asegurar que scripts de shell tengan LF
+*.sh text eol=lf
